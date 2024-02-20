@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_18_230832) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_20_011641) do
   create_table "addresses", force: :cascade do |t|
     t.integer "street_number"
     t.string "street_name"
@@ -29,6 +29,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_18_230832) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "group_id"
+    t.index ["group_id"], name: "index_agents_on_group_id"
     t.index ["user_id"], name: "index_agents_on_user_id"
   end
 
@@ -46,6 +48,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_18_230832) do
     t.index ["address_id"], name: "index_customers_on_address_id"
     t.index ["agent_id"], name: "index_customers_on_agent_id"
     t.index ["insurance_company_id"], name: "index_customers_on_insurance_company_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "city"
+    t.string "state"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "insurance_companies", force: :cascade do |t|
@@ -78,6 +88,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_18_230832) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "agents", "groups"
   add_foreign_key "agents", "users"
   add_foreign_key "customers", "addresses"
   add_foreign_key "customers", "agents"

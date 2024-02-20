@@ -5,4 +5,6 @@ class Agent < ApplicationRecord
   validates :npn, presence:true, numericality:true
   validates :user_id, presence:true, numericality:true
   belongs_to :user
+  belongs_to :group, optional:true
+  
 end
