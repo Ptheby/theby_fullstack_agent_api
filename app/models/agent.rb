@@ -6,5 +6,6 @@ class Agent < ApplicationRecord
   validates :user_id, presence:true, numericality:true
   belongs_to :user
   belongs_to :group, optional:true
+  has_many :customers, :insurance_companies
   
 end
