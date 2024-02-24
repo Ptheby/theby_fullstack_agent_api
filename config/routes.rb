@@ -1,5 +1,9 @@
-resources :users do
-    post 'create_with_agent', on: :collection
+Rails.application.routes.draw do
+    resources :users do
+      collection do
+        post 'create_with_agent'
+      end
+    end
   end
 
   # "resources :users do" generates RESTful routes for the User model. It provies standard CRUD routes for working with the user resource.

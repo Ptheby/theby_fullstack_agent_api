@@ -41,10 +41,10 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:email, :password_digest,:role)
   end
    
   def agent_params
-    params.permit(:first_name,:last_name,:email,:npn,:user_id)
+    params.require(:agent).permit(:first_name, :last_name, :email, :npn)
   end
 end
