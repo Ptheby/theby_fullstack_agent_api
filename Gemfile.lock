@@ -150,6 +150,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.7.3)
     rack (3.0.9)
+    rack-cors (2.0.1)
+      rack (>= 2.0.0)
     rack-session (2.0.0)
       rack (>= 3.0.0)
     rack-test (2.1.0)
@@ -209,6 +211,7 @@ GEM
       rspec-support (~> 3.12)
     rspec-support (3.13.0)
     ruby2_keywords (0.0.5)
+    shutup (0.1.2)
     sqlite3 (1.7.2-aarch64-linux)
     sqlite3 (1.7.2-arm-linux)
     sqlite3 (1.7.2-arm64-darwin)
@@ -242,8 +245,10 @@ DEPENDENCIES
   factory_bot_rails
   faker
   puma (>= 5.0)
+  rack-cors
   rails (~> 7.1.3)
   rspec-rails
+  shutup
   sqlite3 (~> 1.4)
   tzinfo-data
 
