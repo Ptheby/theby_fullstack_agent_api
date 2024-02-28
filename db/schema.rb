@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_27_010657) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_28_020740) do
   create_table "addresses", force: :cascade do |t|
     t.integer "street_number"
     t.string "street_name"
@@ -84,7 +84,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_27_010657) do
 
   create_table "users", force: :cascade do |t|
     t.string "email"
-    t.string "role"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
