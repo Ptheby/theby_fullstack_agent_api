@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     end
   end
 
+  # scope '/users' do 
+  #   post 'create_with_agent'
+  # end 
+
   post '/login', to: 'sessions#create'
 end
 

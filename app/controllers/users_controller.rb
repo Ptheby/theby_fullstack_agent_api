@@ -11,10 +11,15 @@ class UsersController < ApplicationController
   end
 
   def create_with_agent
+    # initializes user (does not save yet)
     @user = User.new(user_params)
+    # stores user_id in agent
     @agent = @user.build_agent(agent_params)
 
-    if @user.save && @agent.save
+    if @user.valid? && @agent.valid?
+      # save user and agent
+      @user.save 
+      @agent.save
       render json: { user: @user, agent: @agent }, status: :created
     else
       render json: { user_errors: @user.errors, agent_errors: @agent.errors }, status: :unprocessable_entity
@@ -41,10 +46,12 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password,:password_confirmation,:role)
+    params.require(:user).permit(:email, :password,:password_confirmation)
   end
    
   def agent_params
     params.require(:agent).permit(:first_name, :last_name, :email, :npn, :state)
   end
 end
+
+
