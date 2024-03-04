@@ -11,6 +11,9 @@ class CreateCustomers < ActiveRecord::Migration[7.1]
       t.references :insurance_company, null: false, foreign_key: true
 
       t.timestamps
+      
+      # add_column :customers, :agent_id, :integer, default: 0
+
     end
   end
 end

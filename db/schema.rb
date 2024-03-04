@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_28_020740) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_04_220655) do
   create_table "addresses", force: :cascade do |t|
     t.integer "street_number"
     t.string "street_name"
@@ -42,8 +42,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_28_020740) do
     t.date "dob"
     t.string "email"
     t.integer "address_id", null: false
-    t.integer "agent_id", null: false
-    t.integer "insurance_company_id", null: false
+    t.integer "agent_id"
+    t.integer "insurance_company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["address_id"], name: "index_customers_on_address_id"
