@@ -17,3 +17,5 @@ class SessionsController < ApplicationController
     JWT.encode(payload, Rails.application.credentials.secret_key_base)
   end
 end
+
+# Take notes on exactly was is happening above
