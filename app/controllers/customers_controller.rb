@@ -72,9 +72,11 @@ class CustomersController < ApplicationController
       :phone,
       :dob,
       :email,
+      :agent_id,
+      :insurance_company_id,
       address_attributes: [:street_number, :street_name, :city, :state, :zip],
-      :agent_id=>[],
-      :insurance_company_id=>[]
+
+      
     )
   end
 end
