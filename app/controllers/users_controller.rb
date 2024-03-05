@@ -1,15 +1,15 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
-    before_action :authenticate_request, except: [:create]
+    # before_action :authenticate_request, except: [:create]
 
   def index
     @users = User.all
-    render json: UserBlueprint.render @users
+    render json: UserBlueprint.render(@users)
   end
 
   def show
     user= User.find_by(id: params[:id])
-    render json: UserBlueprint.render{ user: @user, agent: @user.agent }
+    render json: { user: @user, agent: @user.agent }
   end
 
   def create_with_agent
@@ -22,17 +22,17 @@ class UsersController < ApplicationController
       # save user and agent
       @user.save 
       @agent.save
-      render json: UserBlueprint.render { user: @user, agent: @agent }, status: :created
+      render json: { user: @user, agent: @agent }, status: :created
     else
-      render json: UserBlueprint.render { user_errors: @user.errors, agent_errors: @agent.errors }, status: :unprocessable_entity
+      render json: { user_errors: @user.errors, agent_errors: @agent.errors }, status: :unprocessable_entity
     end
   end
 
   def update
     if @user.update(user_params) && @user.agent.update(agent_params)
-      render json: UserBlueprint.render { user: @user, agent: @user.agent }
+      render json: { user: @user, agent: @user.agent }
     else
-      render json: UserBlueprint.render { user_errors: @user.errors, agent_errors: @user.agent.errors }, status: :unprocessable_entity
+      render json: { user_errors: @user.errors, agent_errors: @user.agent.errors }, status: :unprocessable_entity
     end
   end
 

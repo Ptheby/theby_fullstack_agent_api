@@ -2,17 +2,18 @@ Rails.application.routes.draw do
   resources :users, only: [:create] do
     collection do
       post 'create_with_agent'
-    
     end
   end
 
   resources :customers do
     resources :addresses, only: [:create, :update, :destroy]
-    
   end
 
   post '/login', to: 'sessions#create'
 
+  resources :users, except: [:create] do
+    get '/users', to: 'users#index'  # Adjust 'users#index' to your actual index action
+  end
 end
   
 
