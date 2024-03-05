@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
-    email {"paul@theby.com"}
-    role {"admin"}
-    password_digest {"password_hash"}
+    email {Faker::Internet.email}
+    password { 'password'}
+    password_confirmation { 'password'}
   end
 end

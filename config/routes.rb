@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :users, only: [:create] do
     collection do
       post 'create_with_agent'
+      post '/login', to: 'sessions#create'
     end
   end
 
@@ -10,8 +11,8 @@ Rails.application.routes.draw do
     
   end
 
-  post '/login', to: 'sessions#create'
-end
+#   post '/login', to: 'sessions#create'
+# end
   
 
 
