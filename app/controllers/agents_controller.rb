@@ -1,4 +1,29 @@
-# class AgentsController < ApplicationController
+
+class AgentsController < ApplicationController
+    def index
+      @agents = Agent.all
+      render json: AgentBlueprint.render(@agents)
+    end
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
+
+ 
+
+
+class AgentsController < ApplicationController
 #     before_action :set_user
 #     before_action :set_agent, only: [:show, :update, :destroy]
   

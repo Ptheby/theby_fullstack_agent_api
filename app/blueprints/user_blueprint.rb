@@ -1,8 +1,11 @@
-# frozen_string_literal: true
+class UserBlueprint < Blueprinter::Base
+  identifier :id
+  # field :email
 
-    class UserBlueprint < Blueprinter::Base
-      identifier :id
-    
-      fields :email
-    end
+  view :default do
+    field :email
+    association :agent, blueprint: AgentBlueprint, view: :default
+  end
 
+  association :agent, blueprint: AgentBlueprint
+end
