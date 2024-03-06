@@ -7,5 +7,4 @@ class UserBlueprint < Blueprinter::Base
     association :agent, blueprint: AgentBlueprint, view: :default
   end
 
-  association :agent, blueprint: AgentBlueprint
-end
+
