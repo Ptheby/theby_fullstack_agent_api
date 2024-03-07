@@ -52,7 +52,8 @@ class CustomersController < ApplicationController
       :email,
       :agent_id,
       :insurance_company_id,
-      address_attributes: [:street_number, :street_name, :city, :state, :zip]
+      # address_attributes: [:street_number, :street_name, :city, :state, :zip]
+      :address_id
     )
   end
 end
