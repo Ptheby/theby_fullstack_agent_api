@@ -14,9 +14,9 @@ class UsersController < ApplicationController
   def create_with_agent
     @user = User.new(user_params)
     @agent = @user.build_agent(agent_params)
-
+  
     if @user.valid? && @agent.valid?
-      @user.save 
+      @user.save
       @agent.save
       render json: { user: @user, agent: @agent }, status: :created
     else
@@ -62,7 +62,7 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
   end
-   
+  
   def agent_params
     params.require(:agent).permit(:first_name, :last_name, :npn, :state, :city)
   end
