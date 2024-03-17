@@ -64,6 +64,6 @@ class UsersController < ApplicationController
   end
   
   def agent_params
-    params.require(:agent).permit(:first_name, :last_name, :npn, :state, :city)
+    params.require(:agent).permit(:first_name, :last_name, :npn, :state)
   end
 end
