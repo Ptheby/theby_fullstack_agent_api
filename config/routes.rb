@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :users, only: [:create, :index, :show, :update, :destroy] do
+    post '/login', to: 'sessions#create'
     collection do
       post 'create_with_agent'
     end
@@ -11,5 +12,5 @@ Rails.application.routes.draw do
 
   resources :agents, only: [:index, :update]
 
-  post '/login', to: 'sessions#create'
+
 end

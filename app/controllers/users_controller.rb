@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
-  # before_action :authenticate_request, except: [:create, :agents_index, :create_agent]   activate later
+ 
+  before_action :authenticate_request, except: [:create_agent,  :create_with_agent]
 
   def index
     @users = User.all
@@ -8,7 +9,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    render json: { user: @user, agent: @user&.agent }
+    user = User.find_by(id: params[:id])
+
+
+    render json: { user: @user, agent: @user&.agent }, status: :ok
   end
 
   def create_with_agent
