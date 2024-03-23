@@ -1,11 +1,14 @@
 class UserBlueprint < Blueprinter::Base
   identifier :id
-  # field :email
 
   view :default do
-    field :email
-   
+    fields :email, :id
+  end
+
+  view :extended do
+    include_view :default # Include fields from the default view
+    fields :created_at, :updated_at
+    association :agent, blueprint: AgentBlueprint
   end
 end
-
 

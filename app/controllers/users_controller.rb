@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
- 
-  before_action :authenticate_request, except: [:create_agent,  :create_with_agent]
+  before_action :set_user, except: [:create_agent,:create_with_agent]
+  before_action :authenticate_request, except: [:create_agent, :create_with_agent]
 
   def index
     @users = User.all
@@ -9,10 +8,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    user = User.find_by(id: params[:id])
-
-
-    render json: { user: @user, agent: @user&.agent }, status: :ok
+    @user = User.find(params[:id])
+    @agent = @user.agent
+    debugger
+    render json: UserBlueprint.render(user: @user, view: :extended), status: :ok
   end
 
   def create_with_agent
