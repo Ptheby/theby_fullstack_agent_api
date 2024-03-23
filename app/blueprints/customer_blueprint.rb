@@ -7,7 +7,7 @@ class CustomerBlueprint < Blueprinter::Base
         # field :email
       
         view :default do
-          fields :first_name,:last_name,:phone,:dob,:email,:agent_id
+          fields :first_name,:last_name,:phone,:dob,:email,:agent_id,:address_attributes
           association :agent, blueprint: AgentBlueprint
          
         end
