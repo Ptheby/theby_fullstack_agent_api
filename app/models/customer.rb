@@ -4,7 +4,7 @@ has_one :address
   belongs_to :agent, optional: true   
  
 
-  validates :email, presence:true, email:true
+  validates :email, presence:true
   validates :first_name, presence:true
   validates :last_name, presence:true
   
