@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :addresses, only: [:create, :update, :destroy]
   end
 
-  resources :agents, only: [:index]
+  resources :agents, only: [:index, :update]
 
   post '/login', to: 'sessions#create'
 end
