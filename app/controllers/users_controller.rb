@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     if @agent.save
       render json: @agent, status: :created
     else
-      render j: {son agent_errors: @agent.errors }, status: :unprocessable_entity
+      render json: { agent_errors: @agent.errors }, status: :unprocessable_entity
     end
   end
 
