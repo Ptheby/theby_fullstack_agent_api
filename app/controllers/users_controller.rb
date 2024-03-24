@@ -10,8 +10,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @agent = @user.agent
-    debugger
-    render json: UserBlueprint.render(user: @user, view: :extended), status: :ok
+    
+    render json: UserBlueprint.render( @user, view: :default), status: :ok
   end
 
   def create_with_agent
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     if @agent.save
       render json: @agent, status: :created
     else
-      render json: { agent_errors: @agent.errors }, status: :unprocessable_entity
+      render j: {son agent_errors: @agent.errors }, status: :unprocessable_entity
     end
   end
 
