@@ -6,6 +6,6 @@ class User < ApplicationRecord
     #     super.merge('email' => email)
     #   end
  
-    accepts_nested_attributes_for :agent
+    # accepts_nested_attributes_for :agent
     has_one :agent
 end
