@@ -13,6 +13,7 @@ class CustomersController < ApplicationController
   # GET /customers/new
   def new
     @customer = Customer.new
+    @customer.build_address  # Build associated address for the customer
   end
 
   # GET /customers/:id/edit
@@ -26,7 +27,6 @@ class CustomersController < ApplicationController
     if @customer.save
       redirect_to @customer, notice: 'Customer was successfully created.'
     else
-      puts @customer.errors.full_messages
       render :new
     end
   end
@@ -54,11 +54,6 @@ class CustomersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def customer_params
-      params.require(:customer).permit(:first_name, :last_name, :email, :phone, :dob, :agent_id)
+      params.require(:customer).permit(:first_name, :last_name, :email, :phone, :dob, :agent_id, address_attributes: [:street_number, :street_name, :city, :state, :zip])
     end
-  
-    def address_params
-      params.require(:customer).permit(address_attributes: [:street_number, :street_name, :city, :state, :zip])
-    end
-  end
-
+end
