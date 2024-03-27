@@ -6,5 +6,7 @@ class Customer < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
+  validates_associated :address
+
   accepts_nested_attributes_for :address, allow_destroy: true  # Allow nested attributes for address
 end
