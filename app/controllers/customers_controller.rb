@@ -22,14 +22,11 @@ class CustomersController < ApplicationController
 
   def create_with_address
     @customer = Customer.new(customer_params)
-    @address = @customer.build_address(address_params)
 
-    if @customer.valid? && @address.valid?
-      @customer.save
-      @address.save
-      render json: { customer: @customer, address: @address }, status: :created
+    if @customer.save
+      render json: { customer: @customer }, status: :created
     else
-      render json: { customer_errors: @customer.errors.full_messages, address_errors: @address.errors.full_messages }, status: :unprocessable_entity
+      render json: { customer_errors: @customer.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -60,9 +57,5 @@ class CustomersController < ApplicationController
         :first_name, :last_name, :email, :phone, :dob, :agent_id,
         address_attributes: [:street_number, :street_name, :city, :state, :zip]
       )
-    end
-
-    def address_params
-      params.require(:customer).permit(address_attributes: [:street_number, :street_name, :city, :state, :zip])
     end
 end
