@@ -27,6 +27,7 @@ class CustomersController < ApplicationController
     if @customer.save
       redirect_to @customer, notice: 'Customer was successfully created.'
     else
+      puts @customer.errors.full_messages
       render :new
     end
   end
@@ -54,6 +55,8 @@ class CustomersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def customer_params
-      params.require(:customer).permit(:first_name, :last_name, :email, :phone, :dob, :agent_id, address_attributes: [:street_number, :street_name, :city, :state, :zip])
+      params.require(:customer).permit(
+        :first_name, :last_name, :email, :phone, :dob, :agent_id,
+        address_attributes: [:street_number, :street_name, :city, :state, :zip, :customer_id]
+      )
     end
-end
