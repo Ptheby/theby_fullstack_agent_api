@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'  # Define login route here
 
   resources :customers do
+    collection do
+      post 'create_with_address'
+    end
     resources :addresses, only: [:create, :update, :destroy]
   end
 

@@ -20,17 +20,33 @@ class CustomersController < ApplicationController
   def edit
   end
 
-  # POST /customers
-  def create
-    @customer = Customer.new(customer_params)
 
-    if @customer.save
-      redirect_to @customer, notice: 'Customer was successfully created.'
+  def create_with_address
+    @customer = Customer.new(customer_params)
+    @address = @customer.build_address(address_params)
+  
+    if @customer.valid? && @address.valid?
+      @customer.save
+      @address.save
+      render json: { customer: @customer, address: @address }, status: :created
     else
-      puts @customer.errors.full_messages
-      render :new
+      render json: { customer_errors: @customer.errors, address_errors: @address.errors }, status: :unprocessable_entity
     end
   end
+
+
+
+  # POST /customers
+  # def create
+  #   @customer = Customer.new(customer_params)
+
+  #   if @customer.save
+  #     redirect_to @customer, notice: 'Customer was successfully created.'
+  #   else
+  #     puts @customer.errors.full_messages
+  #     render :new
+  #   end
+  # end
 
   # PATCH/PUT /customers/:id
   def update
@@ -55,7 +71,7 @@ class CustomersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def customer_params
-      params(:customer).permit(
+      params.require(:customer).permit(
         :first_name, :last_name, :email, :phone, :dob, :agent_id,
         address_attributes: [:street_number, :street_name, :city, :state, :zip]
       )
