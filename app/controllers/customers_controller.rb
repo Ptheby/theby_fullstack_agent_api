@@ -26,6 +26,7 @@ class CustomersController < ApplicationController
     if @customer.save
       redirect_to @customer, notice: 'Customer was successfully created.'
     else
+      puts @customer.errors.full_messages
       render :new
     end
   end
