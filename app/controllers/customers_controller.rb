@@ -57,7 +57,6 @@ class CustomersController < ApplicationController
     def customer_params
       params.require(:customer).permit(
         :first_name, :last_name, :email, :phone, :dob, :agent_id,
-        address_attributes: [:street_number, :street_name, :city, :state, :zip, :customer_id]
+        address_attributes: [:street_number, :street_name, :city, :state, :zip]
       )
     end
-  end
