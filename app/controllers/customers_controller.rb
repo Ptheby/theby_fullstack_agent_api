@@ -61,4 +61,4 @@ class CustomersController < ApplicationController
       params.require(:customer).permit(address_attributes: [:street_number, :street_name, :city, :state, :zip])
     end
   end
-end
+
