@@ -1,57 +1,58 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: [:show, :update, :destroy]
+  before_action :set_customer, only: [:show, :edit, :update, :destroy]
 
+  # GET /customers
   def index
     @customers = Customer.all
-    render json: CustomerBlueprint.render(@customers, view: :default)
   end
 
+  # GET /customers/:id
   def show
-    render json: CustomerBlueprint.render(@customer, view: :default)
   end
 
+  # GET /customers/new
+  def new
+    @customer = Customer.new
+  end
+
+  # GET /customers/:id/edit
+  def edit
+  end
+
+  # POST /customers
   def create
     @customer = Customer.new(customer_params)
-  
-    begin
-      if @customer.save
-        render json: CustomerBlueprint.render(@customer, view: :default), status: :created
-      else
-        render json: { customer_errors: @customer.errors }, status: :unprocessable_entity
-      end
-    rescue ActiveRecord::InvalidForeignKey => e
-      render json: { error: e.message }, status: :unprocessable_entity
+
+    if @customer.save
+      redirect_to @customer, notice: 'Customer was successfully created.'
+    else
+      render :new
     end
   end
 
+  # PATCH/PUT /customers/:id
   def update
     if @customer.update(customer_params)
-      render json: CustomerBlueprint.render(@customer, view: :default)
+      redirect_to @customer, notice: 'Customer was successfully updated.'
     else
-      render json: { customer_errors: @customer.errors }, status: :unprocessable_entity
+      render :edit
     end
   end
 
+  # DELETE /customers/:id
   def destroy
     @customer.destroy
-    head :no_content
+    redirect_to customers_url, notice: 'Customer was successfully destroyed.'
   end
 
   private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_customer
+      @customer = Customer.find(params[:id])
+    end
 
-  def set_customer
-    @customer = Customer.find(params[:id])
-  end
-
-  def customer_params
-    params.require(:customer).permit(
-      :first_name,
-      :last_name,
-      :phone,
-      :dob,
-      :email,
-      :agent_id,
-      address_attributes: [:street_number, :street_name, :city, :state, :zip]
-    )
-  end
+    # Only allow a list of trusted parameters through.
+    def customer_params
+      params.require(:customer).permit(:first_name, :last_name, :email, :phone, :dob, :agent_id)
+    end
 end
