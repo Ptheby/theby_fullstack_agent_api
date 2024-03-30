@@ -37,8 +37,8 @@ end
   Customer.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    phone: Faker::PhoneNumber.phone_number,
-    dob: Faker::Date.birthday(min_age: 18, max_age: 90),
+    phone: Faker::PhoneNumber.cell_phone(length:7),
+dob: Faker::Date.birthday(min_age: 18, max_age: 90),
     email: Faker::Internet.email,
     agent_id: Agent.pluck(:id).sample,
     insurance_company_id: InsuranceCompany.pluck(:id).sample,
