@@ -1,9 +1,47 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# db/seeds.rb
+
+require 'faker'
+
+# Seed users
+10.times do
+  User.create!(
+    email: Faker::Internet.unique.email,
+    password: 'password', # Set a default password for seeded users
+    created_at: Faker::Time.between(from: DateTime.now - 1.year, to: DateTime.now)
+  )
+end
+
+# Seed agents with valid user_id references
+10.times do
+  Agent.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    npn: Faker::Number.unique.number(digits: 6),
+    user_id: User.pluck(:id).sample,
+    state: Faker::Address.state,
+    created_at: Faker::Time.between(from: DateTime.now - 1.year, to: DateTime.now)
+  )
+end
+
+# Seed insurance companies with valid agent_id references
+10.times do
+  InsuranceCompany.create!(
+    name: Faker::Company.name,
+    agent_id: Agent.pluck(:id).sample,
+    created_at: Faker::Time.between(from: DateTime.now - 1.year, to: DateTime.now)
+  )
+end
+
+# Seed customers with random agent and insurance company associations
+10.times do
+  Customer.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    phone: Faker::PhoneNumber.phone_number,
+    dob: Faker::Date.birthday(min_age: 18, max_age: 90),
+    email: Faker::Internet.email,
+    agent_id: Agent.pluck(:id).sample,
+    insurance_company_id: InsuranceCompany.pluck(:id).sample,
+    created_at: Faker::Time.between(from: DateTime.now - 1.year, to: DateTime.now)
+  )
+end
