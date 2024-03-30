@@ -4,6 +4,7 @@ class CustomersController < ApplicationController
   # GET /customers
   def index
     @customers = Customer.all
+    render json: {customers: @customers}, status: :created
   end
 
   # GET /customers/:id

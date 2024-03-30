@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     collection do
       post 'create_with_address'
     end
-    resources :addresses, only: [:create, :update, :destroy]
+    resources :addresses, only: [:create, :update, :destroy, :index]
   end
 
   resources :agents, only: [:index, :update]
