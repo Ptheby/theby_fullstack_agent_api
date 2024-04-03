@@ -9,6 +9,7 @@ class AddressesController < ApplicationController
   
     # GET /customers/:customer_id/addresses/:id
     def show
+      @address = Address.find(params[:id])
     end
   
     # GET /customers/:customer_id/addresses/new
