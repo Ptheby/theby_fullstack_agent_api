@@ -31,17 +31,24 @@ end
     created_at: Faker::Time.between(from: DateTime.now - 1.year, to: DateTime.now)
   )
 end
-
-# Seed customers with random agent and insurance company associations
 10.times do
-  Customer.create!(
+  customer = Customer.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    phone: Faker::PhoneNumber.cell_phone(length:7),
-dob: Faker::Date.birthday(min_age: 18, max_age: 90),
+    phone: Faker::PhoneNumber.cell_phone,
+    dob: Faker::Date.birthday(min_age: 18, max_age: 90),
     email: Faker::Internet.email,
-    agent_id: Agent.pluck(:id).sample,
+    agent_id: Faker::Id.agent_id,
     insurance_company_id: InsuranceCompany.pluck(:id).sample,
     created_at: Faker::Time.between(from: DateTime.now - 1.year, to: DateTime.now)
   )
+
+  # Build associated address for the customer
+  customer.build_address(
+    street_number: Faker::Address.building_number,
+    street_name: Faker::Address.street_name,
+    city: Faker::Address.city,
+    state: Faker::Address.state_abbr,
+    zip: Faker::Address.zip_code
+  ).save!
 end

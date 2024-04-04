@@ -1,7 +1,7 @@
 class Customer < ApplicationRecord
   has_one :address, dependent: :destroy
   belongs_to :agent, optional: true
-  validates :phone, presence: true, length: { maximum: 13 } 
+  validates :phone, presence: true, length: { maximum: 15 } 
   validates :email, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true

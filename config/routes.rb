@@ -14,5 +14,5 @@ Rails.application.routes.draw do
     resources :addresses, only: [:create, :update, :destroy, :index]
   end
 
-  resources :agents, only: [:index, :update]
+  resources :agents, only: [:index, :update,:show]
 end
