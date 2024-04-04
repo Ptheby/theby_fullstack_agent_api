@@ -2,6 +2,30 @@
 class AgentsController < ApplicationController
   before_action :set_agent, only: [:show, :update, :destroy]
 
+
+  #assigning csutomers to agents
+  def assign_customer
+    @agent = Agent.find(params[:agent_id])
+    @customer = Customer.find(params[:customer_id])
+
+    # Assign the customer to the agent
+    @customer.agent = @agent
+
+    if @customer.save
+      render json: @customer, status: :ok
+    else
+      render json: @customer.errors, status: :unprocessable_entity
+    end
+  end
+
+  # Other controller actions...
+
+
+
+
+
+
+
   # GET /agents
   def index
     @agents = Agent.all
@@ -49,4 +73,5 @@ class AgentsController < ApplicationController
     def agent_params
       params.require(:agent).permit(:first_name, :last_name, :npn, :state, :user_id)
     end
+
 end

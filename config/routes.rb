@@ -14,5 +14,8 @@ Rails.application.routes.draw do
     resources :addresses, only: [:create, :update, :destroy, :index]
   end
 
-  resources :agents, only: [:index, :update,:show]
-end
+  resources :agents, only: [:index, :update,:show] 
+  post '/agents/:agent_id/assign_customer/:customer_id', to: 'agents#assign_customer', as: 'assign_customer'
+
+  end
+

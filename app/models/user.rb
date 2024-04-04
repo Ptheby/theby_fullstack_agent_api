@@ -7,5 +7,5 @@ class User < ApplicationRecord
     #   end
  
     # accepts_nested_attributes_for :agent
-    has_one :agent
+    has_one :agent, dependent: :destroy
 end
