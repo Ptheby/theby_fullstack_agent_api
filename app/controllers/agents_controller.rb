@@ -3,7 +3,7 @@ class AgentsController < ApplicationController
   before_action :set_agent, only: [:show, :update, :destroy]
 
 
-  #assigning csutomers to agents
+  #Assigning customers to agents
   def assign_customer
     @agent = Agent.find(params[:agent_id])
     @customer = Customer.find(params[:customer_id])
@@ -18,14 +18,7 @@ class AgentsController < ApplicationController
     end
   end
 
-  # Other controller actions...
-
-
-
-
-
-
-
+  
   # GET /agents
   def index
     @agents = Agent.all
