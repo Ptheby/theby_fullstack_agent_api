@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_31_024711) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_07_220720) do
   create_table "addresses", force: :cascade do |t|
     t.integer "street_number"
     t.string "street_name"
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_31_024711) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "state"
+    t.string "phone"
     t.index ["user_id"], name: "index_agents_on_user_id"
   end
 

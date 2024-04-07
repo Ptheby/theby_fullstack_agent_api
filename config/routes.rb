@@ -18,4 +18,4 @@ Rails.application.routes.draw do
   post '/agents/:agent_id/assign_customer/:customer_id', to: 'agents#assign_customer', as: 'assign_customer'
 
   end
-
+resources :policies, only: [:index, :update, :create, :show, :destroy]

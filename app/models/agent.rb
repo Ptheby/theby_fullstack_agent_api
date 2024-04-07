@@ -4,6 +4,7 @@ class Agent < ApplicationRecord
   validates :last_name, presence:true
   validates :npn, presence:true, numericality:true
   validates :state, presence:true
+  validates :phone, presence:true
  
   belongs_to :user
  
