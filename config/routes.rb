@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       post 'create_with_agent'
     end
   end
+  resources :policies, only: [:index, :update, :create, :show, :destroy]
 
   post '/login', to: 'sessions#create'  # Define login route here
 
@@ -18,4 +19,7 @@ Rails.application.routes.draw do
   post '/agents/:agent_id/assign_customer/:customer_id', to: 'agents#assign_customer', as: 'assign_customer'
 
   end
-resources :policies, only: [:index, :update, :create, :show, :destroy]
+
+   
+  
+  

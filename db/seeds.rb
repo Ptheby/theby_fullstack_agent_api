@@ -3,7 +3,7 @@
 require 'faker'
 
 # Seed users
-10.times do
+3.times do
   User.create!(
     email: Faker::Internet.unique.email,
     password: 'password', # Set a default password for seeded users
@@ -12,7 +12,7 @@ require 'faker'
 end
 
 # Seed agents with valid user_id references
-10.times do
+3.times do
   Agent.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
