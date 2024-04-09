@@ -1,11 +1,12 @@
 
 class AgentsController < ApplicationController
   before_action :set_agent, only: [:show, :update, :destroy]
+  before_action :authenticate_request, only: [:show, :update, :destory]
 
 
   #Assigning customers to agents
   def assign_customer
-    @agent = Agent.find(params[:agent_id])
+ 
     @customer = Customer.find(params[:customer_id])
 
     # Assign the customer to the agent
