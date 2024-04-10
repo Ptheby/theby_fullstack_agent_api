@@ -5,19 +5,19 @@ before_action :authenticate_request
 
   #Assigning customers to agents
   def assign_customer
-   
     @agent = @current_user.agent
-    @customer = Customer.find(params[:customer_id])
-
+    @customer = Customer.find(params[:customer_id]) # Ensure it's looking for the correct parameter name
+  
     # Assign the customer to the agent
     @customer.agent = @agent
-
+  
     if @customer.save
       render json: @customer, status: :ok
     else
       render json: @customer.errors, status: :unprocessable_entity
     end
   end
+  
 
   
   # GET /agents
