@@ -1,12 +1,12 @@
 
 class AgentsController < ApplicationController
   before_action :set_agent, only: [:show, :update, :destroy]
-  before_action :authenticate_request, only: [:show, :update, :destory]
-
+before_action :authenticate_request
 
   #Assigning customers to agents
   def assign_customer
- 
+   
+    @agent = @current_user.agent
     @customer = Customer.find(params[:customer_id])
 
     # Assign the customer to the agent
@@ -65,7 +65,7 @@ class AgentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def agent_params
-      params.require(:agent).permit(:first_name, :last_name, :npn, :state, :user_id, :phone)
+      params.require(:agent).permit(:first_name, :last_name, :npn, :state, :user_id, "")
     end
 
 end

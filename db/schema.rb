@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_07_220720) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_10_015604) do
   create_table "addresses", force: :cascade do |t|
     t.integer "street_number"
     t.string "street_name"
@@ -26,7 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_07_220720) do
   create_table "agents", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.integer "npn"
+    t.string "npn"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
