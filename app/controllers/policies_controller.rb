@@ -41,7 +41,7 @@ class PoliciesController < ApplicationController
       end
   
       def policy_params
-        params.require(:policy).permit(:policy_type, :exp_date, :term_length, :premium_amount, :policy_file)
+        params.require(:policy).permit(:policy_type, :exp_date, :term_length, :premium_amount, :policy_file, :insurance_company_id, :customer_id)
       end
   end
   
