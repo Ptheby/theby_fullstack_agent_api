@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_10_015604) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_11_231203) do
   create_table "addresses", force: :cascade do |t|
     t.integer "street_number"
     t.string "street_name"
@@ -58,9 +58,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_015604) do
   end
 
   create_table "policies", force: :cascade do |t|
-    t.string "type"
+    t.string "policy_type"
     t.date "exp_date"
-    t.integer "term_length"
+    t.string "term_length"
     t.integer "customer_id", null: false
     t.integer "agent_id", null: false
     t.integer "insurance_company_id", null: false
