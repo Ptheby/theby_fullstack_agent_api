@@ -4,12 +4,14 @@ Rails.application.routes.draw do
       post 'create_with_agent'
     end
   end
-  resources :policies, only: [:index, :update, :create, :show, :destroy]
-
+ 
   post '/login', to: 'sessions#create'  # Define login route here
 
   resources :customers do
+    resources :policies, only: [:index, :update, :create, :show, :destroy]
+
     collection do
+
       post 'create_with_address'
     end
     resources :addresses, only: [:create, :update, :destroy, :index]
