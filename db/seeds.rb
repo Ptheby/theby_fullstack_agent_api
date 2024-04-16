@@ -54,6 +54,7 @@ end
     zip: Faker::Address.zip_code
   ).save!
 end
+
 10.times do
   Policy.create!(
     policy_type: ["Auto", "Home", "Life"].sample,

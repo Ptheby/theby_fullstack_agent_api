@@ -4,14 +4,21 @@ class CustomersController < ApplicationController
 
   # GET /customers
   def index
-    @customers = Customer.all
-    render json: {customers: @customers}, status: :created
+ 
+      @customers = Customer.all
+  
+    
+    render json: {customers: @customers}, status: :ok
+  end
+
+  def your_customers
+    @customers = @current_user.agent.customers
+    render json: {customers: CustomerBlueprint.render_as_hash(@customers,view: :default)}, status: :ok
   end
 
   # GET /customers/:id
   def show
-    @customer = Customer.find(params[:id])
-  render json: @customer
+    render json: @customer, status: :ok
   end
 
   # GET /customers/new
@@ -37,16 +44,16 @@ class CustomersController < ApplicationController
   # PATCH/PUT /customers/:id
   def update
     if @customer.update(customer_params)
-      redirect_to @customer, notice: 'Customer was successfully updated.'
+      render json: @customer, status: :ok
     else
-      render :edit
+      render json: { customer_errors: @customer.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   # DELETE /customers/:id
   def destroy
     @customer.destroy
-    redirect_to customers_url, notice: 'Customer was successfully destroyed.'
+    head :no_content
   end
 
   private
