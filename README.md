@@ -1,48 +1,46 @@
-# README
+# Lighthouse Backend
+Lighthouse is the backend of the Lighthouse project. The frontend of which can be found here
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[https://github.com/Ptheby/theby_agent_fe]
 
-Things you may want to cover:
+Lighthouse was conceived to provide local insurance agents with a solution for retaining customers facing cancellation or non-renewal. Often, these situations arise due to factors such as excessive claims of a certain type or no longer aligning with a particular insurer's risk appetite. In such cases, customers are left to seek alternative coverage by approaching different carriers, a process that can be time-consuming and uncertain.
 
-* Ruby version
+With the customer's consent, the referring agent can share pertinent details, enabling the receiving agent to assess suitability before engaging directly. This approach minimizes the need for extensive conversations and email exchanges between agents, facilitating a smoother and more efficient resolution.
 
-* System dependencies
+Moreover, Lighthouse operates on a reciprocal basis, fostering a collaborative environment among agents. For every customer entered into the system, agents earn credits that can be redeemed to assist other customers in similar situations. This incentivizes agents to proactively engage with at-risk customers, ensuring they remain within the agency's network and fostering goodwill among agents.
 
-* Configuration
+In essence, Lighthouse not only helps retain potentially lost customers but also fosters cooperation among agents, ultimately benefiting both customers and agents alike.
 
-* Database creation
+# Features
+Controllers to add and delete the following
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-Describe the API and how it relates to the overall full stack project. Include the purpose, target audience and scope.
-    The purpose of my API is to house the database and database methods/code in creating users,agents,customers,policies, and a few other insurance related models. The API has the database for these models and also the actions within to CRUD them in the controllers. The target audience for the application itself is insurance agents. The scope includes the agents details, customer details and customer's policies details. 
+Users- for auth/login
+Agents- created with user as the agent profile for a user
+Customers- can belong to an agent
+Addresses- belongs to customers
+Policies -belongs to agents/customers
+Insurance Companies
 
 
+# Testing
+Has tests for most of the controllers and features. Initate them by typing
 
-Describe the API's architecture, including the main aspects of your application and how it interactions with your front end as well including authentication and authorization.
-   Main aspect is first creating a user/agent together in a one to one relationship;they are one in the same. User info is used for auth and login and agent and user info is used for signup. This is done on the front end and it passes that information from the front end reactive angular forms to the backend to actually be created. This is the same for entering customer and policy information. Authentication and authorization is done on the backend and the front end with token infomation passing back and forth
+bundle exec rspec
+# Installation
+Fork this repository.
+Clone your repository to your local environment.
+Run the following to install all required dependencies.
+bundle install
+Change the environments provided to your specific development or production environments.
+Generate a master key
+Usage
+rails db:migrate
+rails db:seed
+rails s
+Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
+Please make sure to update tests as appropriate.
 
-Describe the setup instructions to start the project.
-
-
-
-Refer to the set of gems utilized in the project other than the default added gems. 
- Bcrypt for password encyption and the utilization of password_digest; has_secure_password. 
- 
-
-
-
-Describe testing made in your API.
-  I tested the first few models with success withn RSPEC. I then tested some of the controller/user and auth with Postman. 
-
-
-Please include the url to your Front end Project's repository
-[https://github.com/Ptheby/theby_fullstack_agent_api](https://github.com/Ptheby/Theby_Fullstack_FE/tree/main)https://github.com/Ptheby/Theby_Fullstack_FE/tree/main
+License
+GNU GPLv3
