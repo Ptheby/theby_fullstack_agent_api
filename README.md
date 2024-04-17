@@ -26,7 +26,7 @@ Insurance Companies
 Has tests for most of the controllers and features. Initate them by typing
 
 bundle exec rspec
-#Installation
+# Installation
 Fork this repository.
 Clone your repository to your local environment.
 Run the following to install all required dependencies.
