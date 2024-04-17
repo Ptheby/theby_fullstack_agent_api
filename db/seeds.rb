@@ -40,10 +40,12 @@ end
     phone: Faker::PhoneNumber.cell_phone,
     dob: Faker::Date.birthday(min_age: 18, max_age: 90),
     email: Faker::Internet.email,
-    agent_id: Agent.pluck(:id).sample,
     insurance_company_id: InsuranceCompany.pluck(:id).sample,
     created_at: Faker::Time.between(from: DateTime.now - 1.year, to: DateTime.now)
   )
+
+
+
 
   # Build associated address for the customer
   customer.build_address(
@@ -56,14 +58,15 @@ end
 end
 
 10.times do
-  Policy.create!(
+  policy = Policy.create!(
     policy_type: ["Auto", "Home", "Life"].sample,
     exp_date: Faker::Date.between(from: Date.today, to: 1.year.from_now),
     term_length: Faker::Number.between(from: 1, to: 10),
-    customer: [customer1, customer2].sample,
-    agent: [agent1, agent2].sample,
-    insurance_company: [insurance_company1, insurance_company2].sample,
+    customer: Customer.order("RANDOM()").first, # Select a random customer from the database
+    agent: Agent.order("RANDOM()").first, # Select a random agent from the database
+    insurance_company: InsuranceCompany.order("RANDOM()").first, # Select a random insurance company from the database
     premium_amount: Faker::Number.decimal(l_digits: 4, r_digits: 2),
     policy_file: Faker::Lorem.word + ".pdf"
   )
 end
+
