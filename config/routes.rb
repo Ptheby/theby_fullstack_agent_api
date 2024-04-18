@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'  # Define login route here
 
   resources :customers do
+    collection do
+      post 'create_with_address'
+    end
     resources :policies, only: [:index, :update, :create, :show, :destroy]
     resources :addresses, only: [:create, :update, :destroy, :index]
   end
@@ -22,4 +25,3 @@ Rails.application.routes.draw do
 
   get '/user', to: 'users#show'
 end
-
