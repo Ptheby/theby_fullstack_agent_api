@@ -1,7 +1,8 @@
 class AgentBlueprint < Blueprinter::Base
   identifier :id
+  view :default do
+  
   fields :first_name, :last_name, :npn, :state, :phone
 
-  association :user, blueprint: UserBlueprint, view: :default
-  
+  end
 end

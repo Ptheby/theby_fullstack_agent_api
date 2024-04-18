@@ -19,5 +19,7 @@ Rails.application.routes.draw do
   post '/assign_customer', to: 'agents#assign_customer', as: 'assign_customer'
 
   get '/your-customers', to: 'customers#your_customers', as: 'your-customers'
+
+  get '/user', to: 'users#show'
 end
 

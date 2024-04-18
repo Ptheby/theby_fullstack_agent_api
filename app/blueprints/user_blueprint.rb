@@ -3,6 +3,7 @@ class UserBlueprint < Blueprinter::Base
 
   view :default do
     fields :email, :id
+    association :agent, blueprint: AgentBlueprint
   end
 
   view :extended do

@@ -1,18 +1,42 @@
 class UsersController < ApplicationController
-  before_action :set_user, except: [:create_agent,:create_with_agent]
+  before_action :set_user, except: [:create_agent, :create_with_agent]
   before_action :authenticate_request, except: [:create_agent, :create_with_agent]
 
   def index
     @users = User.all
     render json: UserBlueprint.render(@users)
   end
-
   def show
-    @user = User.find(params[:id])
-    @agent = @user.agent
-    
-    render json: UserBlueprint.render( @user, view: :default), status: :ok
+    # Extract user ID from decoded JWT token
+    decoded_token = JWT.decode(request.headers['Authorization'].split(' ').last)
+    user_id = decoded_token[:user_id]
+  
+    # Fetch user information based on extracted user ID
+    @user = User.includes(:agent).find(user_id)
+  
+    # Render user and agent data using blueprints
+    user_json = UserBlueprint.render(@user, view: :default)
+    agent_json = AgentBlueprint.render(@user.agent)
+  
+    render json: { user: user_json, agent: agent_json }, status: :ok
   end
+  def show
+    # Extract user ID from decoded JWT token payload
+    decoded_token = JsonWebToken.decode(request.headers['Authorization'])
+    user_id = decoded_token[:user_id]
+    puts "Decoded JWT token: #{decoded_token}"
+  
+    # Fetch user information based on extracted user ID
+    @user = User.includes(:agent).find(user_id)
+  
+    # Render user and agent data using blueprints
+    user_json = UserBlueprint.render(@user, view: :default)
+    agent_json = AgentBlueprint.render(@user.agent)
+  
+    render json: { user: user_json, agent: agent_json }, status: :ok
+  end
+  
+  
 
   def create_with_agent
     @user = User.new(user_params)
@@ -58,7 +82,8 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.find_by(id: params[:id]) || Agent.find_by(id: params[:id])
+    @user = User.find_by(id: params[:id])
+    @user ||= Agent.find_by(id: params[:id])
     render_not_found if @user.nil?
   end
 
@@ -68,5 +93,9 @@ class UsersController < ApplicationController
   
   def agent_params
     params.require(:agent).permit(:first_name, :last_name, :npn, :state, :phone)
+  end
+
+  def render_not_found
+    render json: { error: 'Not Found' }, status: :not_found
   end
 end
